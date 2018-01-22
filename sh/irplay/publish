@@ -1,0 +1,125 @@
+#!/bin/bash
+rootpwd="/home/nieao/Git/gitlab/"
+commit="hs@192.168.1.2:/"
+major=""
+vTag=""
+filepath=""
+filename=""
+
+
+function set_version()
+{
+    temp=$1
+    tempfile="${temp}/version.h"
+    echo  $tempfile
+
+    git rev-list HEAD | sort > config.git-hash
+    LOCALVER=`wc -l config.git-hash | awk '{print $1}'`
+    if [ $LOCALVER \> 1 ] ; then
+        VER=`git rev-list origin/master | sort | join config.git-hash - | wc -l | awk '{print $1}'`
+#        if [ $VER != $LOCALVER ] ; then
+#           VER="$VER.$(($LOCALVER))"
+#		echo $VER
+#        fi
+#        if git status | grep -q "modified:" ; then
+#            VER="${VER}"
+#        fi
+
+	LOCALVER=`expr $LOCALVER + 1`
+        LOCALVER="$LOCALVER.$(git rev-list HEAD -n 1 | cut -c 1-6)"
+        GIT_VERSION=${LOCALVER}
+    else
+        GIT_VERSION="first"
+        VER="x"
+    fi
+    rm -f config.git-hash
+    major=`sed '/VERSION_MAJOR/!d' $temp/version.h | grep -oP "\d+" `
+    cat "${temp}/version.h.template" | sed "s/\$FULL_VERSION/$GIT_VERSION/g" > ${tempfile}
+    #vTag="${major}"".""${GIT_VERSION}"
+    vTag="${major}"".""${GIT_VERSION}""_""`date +%S`"
+    echo $vTag
+echo "------------------------------------------------------ "
+}
+
+
+if [ ! -n "$1" ] 
+    then
+    echo " param err ,please try publish [--help] !"
+    exit
+fi
+
+if [ $1 == "--help" ]
+    then
+    echo "publish [modules] [fuction] "
+    echo "[modules]: cgi; server; gaurd "
+    echo "[fuction]: -u  ==git commit; git tag; git push "
+    echo "[fuction]: -cp ==scp to public version folder  "
+    echo "[fuction]: all == -u -cp "
+
+elif [ $1 == "cgi" ]
+    then
+    filepwd="${rootpwd}cgi/fastcgi"
+    filename="${filepwd}/cgi.fcgi"
+    set_version	"${filepwd}/inc"
+    fileCommit="${commit}var/www/media/cgi-bin/"
+    echo $fileCommit	
+elif [ $1 == "server" ]
+    then
+    filepwd="${rootpwd}server"
+    filename="${rootpwd}server/IrServer.out"
+    set_version	"${filepwd}/inc"
+    fileCommit="${commit}home/hs/server/"
+    echo $fileCommit	
+elif [ $1 == "guquan_server" ]
+    then
+    filepwd="${rootpwd}guquan_server"
+    filename="${rootpwd}guquan_server/IrServer.out"
+    set_version	"${filepwd}/inc"
+    fileCommit="${commit}home/hs/guquan_server/"
+    echo $fileCommit	
+elif [ $1 == "gaurd" ]
+    then
+    filepwd="${rootpwd}guard"
+    filename="${rootpwd}guard/gaurd.out"
+    set_version	"${filepwd}/inc"
+    fileCommit="${commit}home/hs/server/"
+    echo $fileCommit
+elif [ $1 == "spc" ]
+    then
+    filepwd="${rootpwd}spc"
+    filename="${rootpwd}spc/bin/linux/GprsServer.out"
+    set_version	"${filepwd}/inc"
+    fileCommit="${commit}home/hs/neo/spc/"
+    echo $fileCommit
+else
+    exit	
+fi
+
+
+    cd ${filepwd}
+    make clean
+    make
+    branch_name=`git branch | sed -n '/\* /s///p'`
+if [ $# -eq 2 ];then
+    git commit -am $2
+else
+    git commit -am "$branch_name"" publish version"
+fi
+    git tag -a $vTag -m `date --date='0 days ago' +%Y-%m-%d_%H:%M:%S`
+    echo $branch_name 
+    git push -u origin $branch_name
+    git push origin --tags
+    scp  $filename $fileCommit
+    echo $vTag $fileCommit
+
+
+#    cd ${filepwd}
+#    make clean
+#    make
+
+
+  #  git tag -a $vTag -m `date --date='0 days ago' +%Y-%m-%d_%H:%M:%S`
+  #  git push -u origin master 
+  #  git push origin --tags
+  #  scp  $filename $fileCommit
+  #  echo $vTag $fileCommit
