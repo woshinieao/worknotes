@@ -3,12 +3,15 @@ sed命令
 sed是一种流编辑器，它是文本处理中非常中的工具，能够完美的配合正则表达式使用，功能不同凡响。处理时，把当前处理的行存储在临时缓冲区中，称为“模式空间”（pattern space），接着用sed命令处理缓冲区中的内容，处理完成后，把缓冲区的内容送往屏幕。接着处理下一行，这样不断重复，直到文件末尾。文件内容并没有 改变，除非你使用重定向存储输出。Sed主要用来自动编辑一个或多个文件；简化对文件的反复操作；编写转换程序等。
 
 ## sed的选项、命令、替换标记
+
 ### 命令格式
+
 ```
 sed [options] 'command' file(s)
 sed [options] -f scriptfile file(s)
 ```
 ### 选项
+
 ```
 -e<script>或--expression=<script>：以选项中的指定的script来处理输入的文本文件；
 -f<script文件>或--file=<script文件>：以选项中指定的script文件来处理输入的文本文件；
@@ -18,7 +21,6 @@ sed [options] -f scriptfile file(s)
 参数
 文件：指定待处理的文本文件列表。
 ```
-
 ### sed命令
 ```
 a\ 在当前行下面插入文本。
@@ -199,43 +201,57 @@ sed --expression='s/test/check/' --expression='/love/d' file
 file里的内容被读进来，显示在与test匹配的行后面，如果匹配多行，则file的内容将显示在所有匹配行的下面：
 
 sed '/test/r file' filename
-写入文件：w命令  
+```
+### 写入文件：w命令  
+```
 在example中所有包含test的行都被写入file里：
 
 sed -n '/test/w file' example
-追加（行下）：a\命令
+```
+### 追加（行下）：a\命令
+```
 将 this is a test line 追加到 以test 开头的行后面：
-
 sed '/^test/a\this is a test line' file
 在 test.conf 文件第2行之后插入 this is a test line：
 
 sed -i '2a\this is a test line' test.conf
-插入（行上）：i\命令
+```
+### 插入（行上）：i\命令
+```
 将 this is a test line 追加到以test开头的行前面：
 
 sed '/^test/i\this is a test line' file
 在test.conf文件第5行之前插入this is a test line：
 
 sed -i '5i\this is a test line' test.conf
-下一个：n命令
+```
+### 下一个：n命令
+```
 如果test被匹配，则移动到匹配行的下一行，替换这一行的aa，变为bb，并打印该行，然后继续：
 
 sed '/test/{ n; s/aa/bb/; }' file
-变形：y命令
+```
+### 变形：y命令
+```
 把1~10行内所有abcde转变为大写，注意，正则表达式元字符不能使用这个命令：
 
 sed '1,10y/abcde/ABCDE/' file
-退出：q命令
+```
+### 退出：q命令
+```
 打印完第10行后，退出sed
 
 sed '10q' file
-保持和获取：h命令和G命令
+```
+### 保持和获取：h命令和G命令
+```
 在sed处理文件的时候，每一行都被保存在一个叫模式空间的临时缓冲区中，除非行被删除或者输出被取消，否则所有被处理的行都将 打印在屏幕上。接着模式空间被清空，并存入新的一行等待处理。
 
 sed -e '/test/h' -e '$G' file
 在这个例子里，匹配test的行被找到后，将存入模式空间，h命令将其复制并存入一个称为保持缓存区的特殊缓冲区内。第二条语句的意思是，当到达最后一行后，G命令取出保持缓冲区的行，然后把它放回模式空间中，且追加到现在已经存在于模式空间中的行的末尾。在这个例子中就是追加到最后一行。简单来说，任何包含test的行都被复制并追加到该文件的末尾。
-
-保持和互换：h命令和x命令
+```
+### 保持和互换：h命令和x命令
+```
 互换模式空间和保持缓冲区的内容。也就是把包含test与check的行互换：
 
 sed -e '/test/h' -e '/check/x' file
@@ -243,7 +259,9 @@ sed -e '/test/h' -e '/check/x' file
 sed脚本是一个sed的命令清单，启动Sed时以-f选项引导脚本文件名。Sed对于脚本中输入的命令非常挑剔，在命令的末尾不能有任何空白或文本，如果在一行中有多个命令，要用分号分隔。以#开头的行为注释行，且不能跨行。
 
 sed [options] -f scriptfile file(s)
-打印奇数行或偶数行
+```
+### 打印奇数行或偶数行
+```
 方法1：
 
 sed -n 'p;n' test.txt  #奇数行
