@@ -5,13 +5,18 @@
 文件结构图
 ----------------------
 
-### sh 用于存放脚本相关的文档
+### sh 
+
 
 #### irplay 
     存放红外相关的脚本文件
+
     
 
 ### notes 存放笔记
+    -[git](notes/git/README.md)
+    -[DM38x](notes/DM38x/DM385-uboot-kernel.md)
+    -[Regular Expressions](re/README.md)
 
 
 
