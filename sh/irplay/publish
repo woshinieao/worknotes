@@ -6,7 +6,6 @@ vTag=""
 filepath=""
 filename=""
 
-
 function set_version()
 {
     temp=$1
