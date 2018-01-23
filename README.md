@@ -16,5 +16,5 @@
 - [git](notes/git/README.md)
 - [DM38x](notes/DM38x/DM385-uboot-kernel.md)
 - [RegularExpressions](notes/re/README.md)
-
+- [sed](notes/sed/README.md)
 ### study     
