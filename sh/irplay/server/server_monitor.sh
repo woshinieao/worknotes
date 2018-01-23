@@ -44,7 +44,11 @@ do
 			chmod +x upsh
 			upsh
 			rm -rf upFlag
-			#test -d upFlag;
+			if test -e upFlag
+            then
+                rm -rf upFlag
+            else
+                echo "upFlag delete"
 	
 		fi
 	fi
