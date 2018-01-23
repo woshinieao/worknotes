@@ -35,6 +35,24 @@ git config --global alias.zip "archive master --format=zip --output ../code.zip"
 git config --global alias.showcommit "show --shortstat --pretty=format:'%ai %C(yellow)%h %C(reset)%s %C(red)%d'"
 ```
 
+**多用户配置**
+```
+Host github.com
+    HostName github.com
+    IdentityFile ~/.ssh/id_rsa
+Host neo.github.com
+    HostName github.com
+    IdentityFile ~/.ssh/neo
+Host git.haithing.com
+    HostName git.haithing.com
+    Port 2233
+    IdentityFile ~/.ssh/id_rsa
+Host neo.haithing.com
+    HostName git.haithing.com
+    Port 2233
+    User neo
+    IdentityFile ~/.ssh/neo
+```
 **vim输入模式配置**
 
 ```
@@ -151,7 +169,10 @@ export LESSCHARSET=utf-8
     ```
     git log --stat
     ```
-
+1. 将tag跟log一起显示前面x条
+    ```
+    git log --oneline --decorate -n x
+    ```
 1. 搜索提交历史，根据关键词
     ```
     git log -S (keyword)
