@@ -14,9 +14,9 @@
     
 
 ### notes 存放笔记
-    -[git](notes/git/README.md)
-    -[DM38x](notes/DM38x/DM385-uboot-kernel.md)
-    -[Regular Expressions](re/README.md)
+    - [git](notes/git/README.md)
+    - [DM38x](notes/DM38x/DM385-uboot-kernel.md)
+    - [Regular Expressions](re/README.md)
 
 
 
