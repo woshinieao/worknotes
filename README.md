@@ -9,15 +9,12 @@
 
 
 #### irplay 
-    存放红外相关的脚本文件
 
     
 
-### notes 存放笔记
+### notes
 - [git](notes/git/README.md)
 - [DM38x](notes/DM38x/DM385-uboot-kernel.md)
-- [Regular Expressions](re/README.md)
+- [RegularExpressions](notes/re/README.md)
 
-
-
-### study 存放学习内容     
+### study     
