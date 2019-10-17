@@ -18,4 +18,4 @@
 - [RegularExpressions](notes/re/README.md)
 - [sed](notes/sed/README.md)
 ### 学习笔记     
-- [lievent](study/libevent/miniheap/README.md)
+- [lievent](study/README.md)
