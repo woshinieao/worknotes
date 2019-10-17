@@ -24,30 +24,18 @@ libevent使用数组的形式来存储最小堆，数据结构中的p就是用�
 
 最小堆相关的操作函数
 ```
-static inline void	     min_heap_ctor(min_heap_t* s);
-static inline void	     min_heap_dtor(min_heap_t* s);
-
-static inline void	     min_heap_elem_init(struct event* e);
-
-static inline int	     min_heap_elt_is_top(const struct event *e);
-
-static inline int	     min_heap_elem_greater(struct event *a, struct event *b);
-
-static inline int	     min_heap_empty(min_heap_t* s);
-
+static inline void	         min_heap_ctor(min_heap_t* s);
+static inline void	         min_heap_dtor(min_heap_t* s);
+static inline void	         min_heap_elem_init(struct event* e);
+static inline int	         min_heap_elt_is_top(const struct event *e);
+static inline int	         min_heap_elem_greater(struct event *a, struct event *b);
+static inline int	         min_heap_empty(min_heap_t* s);
 static inline unsigned	     min_heap_size(min_heap_t* s);
-
 static inline struct event*  min_heap_top(min_heap_t* s);
-
-static inline int	     min_heap_reserve(min_heap_t* s, unsigned n);
-
-static inline int	     min_heap_push(min_heap_t* s, struct event* e);
-
+static inline int	         min_heap_reserve(min_heap_t* s, unsigned n);
+static inline int	         min_heap_push(min_heap_t* s, struct event* e);
 static inline struct event*  min_heap_pop(min_heap_t* s);
-
-static inline int	     min_heap_erase(min_heap_t* s, struct event* e);
-
-static inline void	     min_heap_shift_up_(min_heap_t* s, unsigned hole_index, struct event* e);
-
-static inline void	     min_heap_shift_down_(min_heap_t* s, unsigned hole_index, struct event* e);
+static inline int	         min_heap_erase(min_heap_t* s, struct event* e);
+static inline void	         min_heap_shift_up_(min_heap_t* s, unsigned hole_index, struct event* e);
+static inline void	         min_heap_shift_down_(min_heap_t* s, unsigned hole_index, struct event* e);
 ```
