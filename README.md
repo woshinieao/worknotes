@@ -17,5 +17,5 @@
 - [DM38x](notes/DM38x/DM385-uboot-kernel.md)
 - [RegularExpressions](notes/re/README.md)
 - [sed](notes/sed/README.md)
-### study     
-- [学习笔记](study/README.md)
+### 学习笔记     
+- [lievent](study/libevent/miniheap/README.md)
