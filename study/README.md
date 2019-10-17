@@ -1,6 +1,6 @@
 
 # libevent
-- [libevent](study/libevent/README.md)
+- [libevent](libevent/README.md)
 
 # ffmpeg
 
