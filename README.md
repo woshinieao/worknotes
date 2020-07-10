@@ -9,5 +9,8 @@
 - [DM38x](notes/DM38x/DM385-uboot-kernel.md)
 - [RegularExpressions](notes/re/README.md)
 - [sed](notes/sed/README.md)
+- [grep](notes/grep/README.md)
+- [vim](notes/vim/README.md)
+- [find](notes/find/README.md)
 ### 学习笔记     
 - [study_notes](study/README.md)
