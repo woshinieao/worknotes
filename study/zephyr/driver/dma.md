@@ -81,12 +81,18 @@ DEVICE_DEFINE和DEVICE_INIT都使用DEVICE_AND_API_INIT来完成device drv的注
 ephyr在使用DEVICE_AND_API_INIT注册宏时,需要开发者为驱动指定Level，不同的驱动level初始化的时机不一样，参见Zephyr如何运行到main, Zephyr一共分为4个level：
 
 PRE_KERNEL_1
-该阶段只初始化完成中断控制器,内核尚未初始化, 因此该Level的驱动可以使用中断但不能用内核服务，也不依赖其它设备驱动。该Level的驱动初始化函数执行在中断堆栈上。
+
+    该阶段只初始化完成中断控制器,内核尚未初始化, 因此该Level的驱动可以使用中断但不能用内核服务，也不依赖其它设备驱动。该Level的驱动初始化函数执行在中断堆栈上。
+
 PRE_KERNEL_2
-该阶段已经完成了PRE_KERNEL_1初始化，但内核尚未初始化，因此该Level的驱动可以使用中断和PRE_KERNEL_1的驱动，但不能使用内核服务。该Level的驱动初始化函数执行在中断堆栈上。
+
+    该阶段已经完成了PRE_KERNEL_1初始化，但内核尚未初始化，因此该Level的驱动可以使用中断和PRE_KERNEL_1的驱动，但不能使用内核服务。该Level的驱动初始化函数执行在中断堆栈上。
+
 POST_KERNEL
-该阶段已完成PRE_KERNEL_2初始化和内核初始化，因此该Level的驱动可以使用其它驱动和内核服务。该Level驱动初始化函数执行在main thread的堆栈上。
+
+    该阶段已完成PRE_KERNEL_2初始化和内核初始化，因此该Level的驱动可以使用其它驱动和内核服务。该Level驱动初始化函数执行在main thread的堆栈上。
 APPLICATION
-为了应用组件使用(例如shell),可以使用其它驱动和所有的内核服务。该Level驱动初始化函数执行在main thread的堆栈上。
+
+    为了应用组件使用(例如shell),可以使用其它驱动和所有的内核服务。该Level驱动初始化函数执行在main thread的堆栈上。
 
 
