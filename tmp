@@ -1,0 +1,80 @@
+DEB_BUILD_OPTIONS=nocheck DEB_BUILD_PROFILES="nocheck sw_64" pkgbuilder -s sunway  -u v15-cve-fix  -d
+DEB_BUILD_OPTIONS=nocheck DEB_BUILD_PROFILES="nocheck sw_64" pkgbuilder -s sunway -p -u v15-cve-fix  -d   
+DEB_BUILD_OPTIONS=nocheck DEB_BUILD_PROFILES="nocheck sw_64" pkgbuilder -s sunway -p   -d
+
+
+
+
+
+
+
+
+
+CC = g++
+ Cflag = -g
+ SRC = $(wildcard *.cpp)
+ OBJS = $(patsubst %cpp, %o, $(SRC))
+ HEADER = $(wildcard ../include/*.h)
+ Lib = -lavformat -lavdevice -lavcodec -lavutil -lpthread -lswscale -lswresample  -lz -lm -lbz2 -llzma                                                                 
+ Lib2=-ldl -lrt
+ Path = ~/simpleffmpeg/lib
+ INCLUDE = ~/simpleffmpeg/include
+ Target = vfilter
+ 
+ all: $(Target)
+ 
+ %.o:%.cpp $(HEADER)
+     $(CC) $(Cflag) -c $< -o $@ -I ../include $(INCLUDE)
+ 
+ $(Target):$(OBJS)
+     $(CC) $(Cflag) -o $@ $^  -L$(Path)  $(Lib) $(Lib2) 
+ 
+ .PHONY:clean
+ 
+ clean:
+     rm -f *.o $(Target)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+rsyslog:
+	 
+	  Depends: librelp-dev (>= 1.2.16) but it is not going to be installed                                                                                          
+      Depends: liblognorm-dev (>= 2.0.3) but it is not going to be installed                                                                                        
+      Depends: libfastjson-dev (>= 0.99.8) but it is not going to be installed                                                                                      
+      Depends: libczmq-dev (>= 3.0.2) which is a virtual package and is not provided by any available package 
+	 
+
+													 
+gnupg2:						 
+	  Depends: libassuan-dev (>= 2.5.0) but it is not going to be installed
+      Depends: libassuan-mingw-w64-dev (>= 2.5.0) which is a virtual package and is not provided by any available package
+      Depends: libgcrypt-mingw-w64-dev (>= 1.7.0) which is a virtual package and is not provided by any available package
+      Depends: libgpg-error-mingw-w64-dev (>= 1.26-2~) which is a virtual package and is not provided by any available package
+      Depends: libksba-mingw-w64-dev (>= 1.3.4) which is a virtual package and is not provided by any available package
+      Depends: libz-mingw-w64-dev which is a virtual package and is not provided by any available package
+
+webkit2gtk:
+ pbuilder-satisfydepends-dummy : Depends: bubblewrap (>= 0.3.1) which is a virtual package and is not provided by any available package                                                        
+                                                                                            
+                                 Depends: libwoff-dev (>= 1.0.2) which is a virtual packageand is not provided by any available package
+                                                                                                                               
+                                 Depends: libopenjp2-7-dev (>= 2.2.0) but it is not going to be installed
+                                 Depends: libgstreamer1.0-dev (>= 1.13.1) but it is not going to be installed
+                                 Depends: libgstreamer-plugins-base1.0-dev (>= 1.13.1) but it is not going to be installed
+								 
+								 
+prefix='/usr'
+
+cd build-gpgv-udeb && ../configure --build=sw_64-linux-gnu --prefix=/usr --includedir=\${prefix}/include --mandir=\${prefix}/share/man --infodir=\${prefix}/share/info --sysconfdir=/etc --localstatedir=/var --disable-silent-rules --libdir=\${prefix}/lib/sw_64-linux-gnu --libexecdir=\${prefix}/lib/sw_64-linux-gnu --runstatedir=/run --disable-maintainer-mode --disable-dependency-tracking --disable-gpgtar --disable-bzip2 --disable-gpgsm --disable-scdaemon --disable-dirmngr --disable-doc --disable-tofu --disable-exec --disable-ldap --disable-gnutls --disable-sqlite --disable-libdns
