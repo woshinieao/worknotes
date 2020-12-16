@@ -71,13 +71,13 @@ DEVICE_AND_API_INIT(dmamux_##index, DT_INST_LABEL(index),	\
 	Z_INIT_ENTRY_DEFINE(_CONCAT(__device_, dev_name), init_fn,	\
 			    (&_CONCAT(__device_, dev_name)), level, prio)
 
-
+```
 宏 DEVICE_AND_API_INIT将驱动drv name, init函数, cfg info, data, level prio和api组合成两个结构体struct device_config和struct device.
 
 DEVICE_DEFINE和DEVICE_INIT都使用DEVICE_AND_API_INIT来完成device drv的注册，区别在于DEVICE_INIT不预先设置drv api，而是在运行时(例如init函数中)设置driver_api.
-```
-* 驱动初始化顺序
-```c
+
+***驱动初始化顺序*** 
+
 ephyr在使用DEVICE_AND_API_INIT注册宏时,需要开发者为驱动指定Level，不同的驱动level初始化的时机不一样，参见Zephyr如何运行到main, Zephyr一共分为4个level：
 
 PRE_KERNEL_1
@@ -88,5 +88,5 @@ POST_KERNEL
 该阶段已完成PRE_KERNEL_2初始化和内核初始化，因此该Level的驱动可以使用其它驱动和内核服务。该Level驱动初始化函数执行在main thread的堆栈上。
 APPLICATION
 为了应用组件使用(例如shell),可以使用其它驱动和所有的内核服务。该Level驱动初始化函数执行在main thread的堆栈上。
-```
+
 
